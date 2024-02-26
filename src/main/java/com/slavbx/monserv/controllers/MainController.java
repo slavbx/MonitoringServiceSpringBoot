@@ -21,14 +21,17 @@ public class MainController {
 
     @GetMapping("getrecord")
     @ResponseBody
-    public Record getRecord(Model model, @RequestParam(value = "id") Long id) {
-        model.addAttribute("id", id);
+    public Record getRecord(@RequestParam(value = "id") Long id) {
         return recordService.findById(id).orElse(null);
     }
 
-    @GetMapping("hello")
-    @ResponseBody
-    public String getHello() {
-        return recordService.findById(2L).orElse(null).toString();
+    @GetMapping("/actual-record")
+    //@ResponseBody
+    public String viewActualRecord(Model model) {
+        String username = "slav"; //сделать динамику
+        model.addAttribute("username", username);
+        return "actual-record";
     }
+
+
 }

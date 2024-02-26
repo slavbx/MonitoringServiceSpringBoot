@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <title>Просмотр актуальных показаний</title>
+</head>
+<body>
+    <div class="sidenav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div class="main">
+        <h1><span th:text="${'Личный кабинет ' + username}"/></h1>
+        <h2>Актуальные показания</h2>
+        <p>This sidebar is as tall as its content (the links), and is always shown.</p>
+        <p>Scroll down the page to see the result.</p>
+    </div>
+</body>
+</html>
