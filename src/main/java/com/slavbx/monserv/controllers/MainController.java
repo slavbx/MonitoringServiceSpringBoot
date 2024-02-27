@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class MainController {
     RecordService recordService;
@@ -23,6 +25,15 @@ public class MainController {
     @ResponseBody
     public Record getRecord(@RequestParam(value = "id") Long id) {
         return recordService.findById(id).orElse(null);
+    }
+
+    @GetMapping("/getallrecords")
+    @ResponseBody
+    public List<Record> getAllRecord() {
+        List<Record> list = recordService.findActualAllUsers();
+        list.forEach(System.out::println);
+        return list;
+
     }
 
     @GetMapping("/actual-record")

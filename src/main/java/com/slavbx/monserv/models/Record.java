@@ -21,17 +21,17 @@ public class Record implements Comparable<Record> {
     private Integer cold;       //показания холодной воды
     @Column
     private Integer hot;        //показания горячей воды
-    @Transient
-    private String userName;    //имя пользователя
+    @Column(name = "user_id")
+    private Long userId;    //имя пользователя
     @Column
     private LocalDate date;     //дата подачи
 
-    public Record(Integer heat, Integer cold, Integer hot, String userName, LocalDate date) {
-        //this.id = id;
+    public Record(Long id, Integer heat, Integer cold, Integer hot, Long userId, LocalDate date) {
+        this.id = id;
         this.heat = heat;
         this.cold = cold;
         this.hot = hot;
-        this.userName = userName;
+        this.userId = userId;
         this.date = date;
     }
 
@@ -44,6 +44,14 @@ public class Record implements Comparable<Record> {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Integer getHeat() {
@@ -70,13 +78,7 @@ public class Record implements Comparable<Record> {
         this.hot = hot;
     }
 
-    public String getUserName() {
-        return userName;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public LocalDate getDate() {
         return date;
@@ -88,7 +90,7 @@ public class Record implements Comparable<Record> {
 
     @Override
     public String toString() {
-        return "Пользователь: " + this.getUserName() + " | Дата: " + this.getDate() + " " + "| Отопл: " + this.getHeat()
+        return "Дата: " + this.getDate() + " " + "| Отопл: " + this.getHeat()
                 + " " + "| ХВС: " + this.getCold() + " " + "| ГВС: " + this.getHot();
     }
 
