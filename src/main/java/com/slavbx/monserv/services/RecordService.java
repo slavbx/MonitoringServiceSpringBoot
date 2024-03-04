@@ -6,6 +6,7 @@ import com.slavbx.monserv.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -23,13 +24,14 @@ public class RecordService {
     }
 
 
+    @PostConstruct
     public void init() {
-        //Record record1 = new Record(1L, 111,11,11,1L, LocalDate.parse("2023-11-12"));
-        //Record record2 = new Record(2L, 222,22,22,1L, LocalDate.parse("2023-12-15"));
-        //Record record3 = new Record(3L, 333,33,33,1L, LocalDate.parse("2024-01-05"));
-        //save(record1);
-        //save(record2);
-        //save(record3);
+        if (findByUserId(1L).isEmpty()) {
+            User user = new User(1L, User.Level.USER, "slav", "123");
+            save(new Record(1L, 111,11,11, user, LocalDate.parse("2023-11-12")));
+            save(new Record(2L, 222,22,22, user, LocalDate.parse("2023-12-15")));
+            save(new Record(3L, 333,33,33, user, LocalDate.parse("2024-01-05")));
+        }
     }
 
     public List<Record> findAll() {

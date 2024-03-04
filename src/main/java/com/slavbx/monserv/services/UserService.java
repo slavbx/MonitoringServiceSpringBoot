@@ -24,10 +24,9 @@ public class UserService {
 
     @PostConstruct
     public void init() {
-//        if (findByName("slav").isEmpty()) {
-//            User user = new User(1L, User.Level.USER, "slav", "123");
-//            save(user);
-//        }
+        if (findByName("slav").isEmpty()) {
+            this.save(new User(1L, User.Level.USER, "slav", "123"));
+        }
     }
 
     public void save(User user) {

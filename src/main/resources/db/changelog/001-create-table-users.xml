@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
         logicalFilePath="db/changelog.xml">
-        <changeSet id="021-create-table-users" author="slavbx">
+        <changeSet id="031-create-table-users" author="slavbx">
             <sql>
                     CREATE SCHEMA IF NOT EXISTS monserv;
             </sql>

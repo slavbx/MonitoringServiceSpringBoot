@@ -1,6 +1,8 @@
 package com.slavbx.monserv.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.time.LocalDate;
@@ -21,7 +23,8 @@ public class Record implements Comparable<Record> {
     private Integer cold;       //показания холодной воды
     @Column
     private Integer hot;        //показания горячей воды
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "user_id")
     private User user;          //принадлежность к пользователю
     @Column
