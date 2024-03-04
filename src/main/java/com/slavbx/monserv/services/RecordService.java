@@ -1,20 +1,17 @@
 package com.slavbx.monserv.services;
 
 import com.slavbx.monserv.models.Record;
+import com.slavbx.monserv.models.User;
 import com.slavbx.monserv.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class RecordService {
@@ -23,6 +20,16 @@ public class RecordService {
     @Autowired
     public RecordService(RecordRepository recordRepository) {
         this.recordRepository = recordRepository;
+    }
+
+
+    public void init() {
+        //Record record1 = new Record(1L, 111,11,11,1L, LocalDate.parse("2023-11-12"));
+        //Record record2 = new Record(2L, 222,22,22,1L, LocalDate.parse("2023-12-15"));
+        //Record record3 = new Record(3L, 333,33,33,1L, LocalDate.parse("2024-01-05"));
+        //save(record1);
+        //save(record2);
+        //save(record3);
     }
 
     public List<Record> findAll() {
@@ -38,7 +45,7 @@ public class RecordService {
     public List<Record> findActualAllUsers() {
         List<Record> list = recordRepository.findAll();
         //list.sort(Comparator.reverseOrder());
-        Map<Long, List<Record>> groupedRecords = list.stream().collect(Collectors.groupingBy(Record::getUserId));
+        Map<Long, List<Record>> groupedRecords = list.stream().collect(Collectors.groupingBy(r -> r.getUser().getId()));
         //groupedRecords.forEach((k, v) -> v.sort(Comparator.reverseOrder()));
         return groupedRecords.values().stream().map(l -> l.get(0)).collect(Collectors.toList());
     }
@@ -47,8 +54,8 @@ public class RecordService {
         return recordRepository.findByUserId(userId);
     }
 
-    public <S extends Record> S save(S entity) {
-        return recordRepository.save(entity);
+    public void save(Record record) {
+        recordRepository.save(record);
     }
 
     public Optional<Record> findById(Long aLong) {

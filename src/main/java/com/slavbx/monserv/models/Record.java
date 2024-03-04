@@ -9,11 +9,11 @@ import java.time.LocalDate;
  * Запись показаний счетчиков, передаваемая пользователем
  */
 @Entity
-@Table(name="records")
+@Table(name = "records")
 public class Record implements Comparable<Record> {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;            //идентификатор записи
     @Column
     private Integer heat;       //показания отопления
@@ -21,17 +21,18 @@ public class Record implements Comparable<Record> {
     private Integer cold;       //показания холодной воды
     @Column
     private Integer hot;        //показания горячей воды
-    @Column(name = "user_id")
-    private Long userId;    //имя пользователя
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;          //принадлежность к пользователю
     @Column
     private LocalDate date;     //дата подачи
 
-    public Record(Long id, Integer heat, Integer cold, Integer hot, Long userId, LocalDate date) {
+    public Record(Long id, Integer heat, Integer cold, Integer hot, User user, LocalDate date) {
         this.id = id;
         this.heat = heat;
         this.cold = cold;
         this.hot = hot;
-        this.userId = userId;
+        this.user = user;
         this.date = date;
     }
 
@@ -46,12 +47,21 @@ public class Record implements Comparable<Record> {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
+
+
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getHeat() {
@@ -90,8 +100,8 @@ public class Record implements Comparable<Record> {
 
     @Override
     public String toString() {
-        return "Дата: " + this.getDate() + " " + "| Отопл: " + this.getHeat()
-                + " " + "| ХВС: " + this.getCold() + " " + "| ГВС: " + this.getHot();
+        return "Пользователь: " + this.getUser().getName() + " " + "| Отопл: " + this.getHeat()
+                + " " + "| ХВС: " + this.getCold() + " " + "| ГВС: " + this.getHot() + "| Дата: " + this.getDate();
     }
 
     @Override

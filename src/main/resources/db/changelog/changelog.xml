@@ -6,8 +6,8 @@
          https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
         logicalFilePath="db/changelog.xml">
     <include file="001-create-table-users.xml" relativeToChangelogFile="true"/>
-    <include file="002-insert-data-users.xml" relativeToChangelogFile="true"/>
+    <!--<include file="002-insert-data-users.xml" relativeToChangelogFile="true"/>-->
     <include file="003-create-table-records.xml" relativeToChangelogFile="true"/>
-    <include file="004-insert-data-records.xml" relativeToChangelogFile="true"/>
-    <include file="005-create-table-events.xml" relativeToChangelogFile="true"/>
+    <!--<include file="004-insert-data-records.xml" relativeToChangelogFile="true"/>-->
+    <!--<include file="005-create-table-events.xml" relativeToChangelogFile="true"/>-->
 </databaseChangeLog>

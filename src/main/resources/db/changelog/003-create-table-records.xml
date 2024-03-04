@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
         logicalFilePath="db/changelog.xml">
-        <changeSet id="033-create-table-records" author="slavbx">
+        <changeSet id="023-create-table-records" author="slavbx">
             <createTable tableName="records" schemaName="monserv">
                 <column name="id" type="BIGINT" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false" />
@@ -14,9 +14,7 @@
                 <column name="cold" type="BIGINT" />
                 <column name="hot" type="BIGINT" />
                 <column name="user_id" type="BIGINT">
-                    <constraints nullable="false"
-                                 foreignKeyName="fk_user_id"
-                                 references="users(id)"/>
+                    <constraints nullable="false" foreignKeyName="fk_user_id" references="monserv.users(id)"/>
                 </column>
                 <column name="date" type="DATE" />
             </createTable>
