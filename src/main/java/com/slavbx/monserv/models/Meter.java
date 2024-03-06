@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Table(name = "meters")
 public class Meter implements Comparable<Meter> {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, all)
     @Column(name = "id")
     private Long id;            //идентификатор записи
     @Column
