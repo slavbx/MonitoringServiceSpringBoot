@@ -3,7 +3,6 @@ package com.slavbx.monserv.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.time.LocalDate;
 
@@ -11,8 +10,8 @@ import java.time.LocalDate;
  * Запись показаний счетчиков, передаваемая пользователем
  */
 @Entity
-@Table(name = "records")
-public class Record implements Comparable<Record> {
+@Table(name = "meters")
+public class Meter implements Comparable<Meter> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -30,7 +29,7 @@ public class Record implements Comparable<Record> {
     @Column
     private LocalDate date;     //дата подачи
 
-    public Record(Long id, Integer heat, Integer cold, Integer hot, User user, LocalDate date) {
+    public Meter(Long id, Integer heat, Integer cold, Integer hot, User user, LocalDate date) {
         this.id = id;
         this.heat = heat;
         this.cold = cold;
@@ -39,7 +38,7 @@ public class Record implements Comparable<Record> {
         this.date = date;
     }
 
-    public Record() {
+    public Meter() {
     }
 
     public Long getId() {
@@ -108,7 +107,7 @@ public class Record implements Comparable<Record> {
     }
 
     @Override
-    public int compareTo(Record r) {
+    public int compareTo(Meter r) {
         if (this.getDate().isAfter(r.getDate())) {
             return 1;
         } else if (this.getDate().isBefore(r.getDate())) {

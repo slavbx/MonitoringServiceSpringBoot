@@ -1,16 +1,11 @@
 package com.slavbx.monserv.services;
 
-import com.slavbx.monserv.models.Record;
 import com.slavbx.monserv.models.User;
 import com.slavbx.monserv.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,9 +19,9 @@ public class UserService {
 
     @PostConstruct
     public void init() {
-        if (findByName("slav").isEmpty()) {
-            this.save(new User(1L, User.Level.USER, "slav", "123"));
-        }
+//        if (findByName("slav").isEmpty()) {
+//            this.save(new User(1L, User.Level.USER, "slav", "123"));
+//        }
     }
 
     public void save(User user) {

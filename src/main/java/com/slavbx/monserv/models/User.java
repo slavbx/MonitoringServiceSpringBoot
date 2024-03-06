@@ -3,7 +3,6 @@ package com.slavbx.monserv.models;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
-import org.springframework.lang.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class User {
     private String password;        //Пароль
     @OneToMany(mappedBy = "user")
     @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    private List<Record> records;   //Список показаний счётчиков
+    private List<Meter> records;   //Список показаний счётчиков
 
 
     public enum Level {
@@ -77,15 +76,15 @@ public class User {
         this.password = password;
     }
 
-    public List<Record> getRecords() {
+    public List<Meter> getRecords() {
         return records;
     }
 
-    public void setRecords(List<Record> records) {
+    public void setRecords(List<Meter> records) {
         this.records = records;
     }
 
-    public void addRecord(Record record) {
+    public void addRecord(Meter record) {
         records.add(record);
     }
 

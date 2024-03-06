@@ -5,8 +5,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
         logicalFilePath="db/changelog.xml">
-    <changeSet id="034-insert-data-records" author="slavbx">
-        <insert tableName="records" schemaName="monserv">
+    <changeSet id="034-insert-data-meters" author="slavbx">
+        <insert tableName="meters" schemaName="monserv">
             <!--<column name="id" valueNumeric="1"/>-->
             <column name="heat" valueNumeric="555"/>
             <column name="cold" valueNumeric="55"/>
