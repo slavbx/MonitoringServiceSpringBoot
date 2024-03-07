@@ -7,8 +7,11 @@
         logicalFilePath="db/changelog.xml">
         <changeSet id="013-create-table-meters" author="slavbx">
             <createTable tableName="meters" schemaName="monserv">
-                <column name="id" type="BIGINT" autoIncrement="true">
-                    <constraints primaryKey="true" nullable="false" />
+<!--                <column name="id" type="BIGINT" autoIncrement="true">-->
+<!--                    <constraints primaryKey="true" nullable="false" />-->
+<!--                </column>-->
+                <column name="id" type="BIGINT" defaultValueComputed="nextval('meters_id_seq')">
+                    <constraints primaryKey="true" nullable="false"/>
                 </column>
                 <column name="heat" type="BIGINT" />
                 <column name="cold" type="BIGINT" />
