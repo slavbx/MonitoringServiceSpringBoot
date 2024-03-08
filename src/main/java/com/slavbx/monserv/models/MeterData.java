@@ -11,35 +11,32 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "meters")
-public class Meter implements Comparable<Meter> {
+public class MeterData implements Comparable<MeterData> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "meters_id_seq_gen")
     @SequenceGenerator(name = "meters_id_seq_gen", sequenceName = "meters_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Long id;            //идентификатор записи
     @Column
-    private Integer heat;       //показания отопления
-    @Column
-    private Integer cold;       //показания холодной воды
-    @Column
-    private Integer hot;        //показания горячей воды
-    @ManyToOne(fetch = FetchType.LAZY)
-    @NotFound(action = NotFoundAction.IGNORE)
+    private Integer value;       //показания счётчика
+    @ManyToOne(fetch = FetchType.LAZY) //@NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "user_id")
     private User user;          //принадлежность к пользователю
+    @OneToOne
+    @JoinColumn(name = "type_id")
+    private MeterType type;        //тип счётчика
     @Column
     private LocalDate date;     //дата подачи
 
-    public Meter(Long id, Integer heat, Integer cold, Integer hot, User user, LocalDate date) {
+    public MeterData(Long id, Integer value, User user, MeterType type, LocalDate date) {
         this.id = id;
-        this.heat = heat;
-        this.cold = cold;
-        this.hot = hot;
+        this.value = value;
         this.user = user;
+        this.type = type;
         this.date = date;
     }
 
-    public Meter() {
+    public MeterData() {
     }
 
     public Long getId() {
@@ -50,15 +47,6 @@ public class Meter implements Comparable<Meter> {
         this.id = id;
     }
 
-//    public Long getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Long userId) {
-//        this.userId = userId;
-//    }
-
-
     public User getUser() {
         return user;
     }
@@ -67,31 +55,21 @@ public class Meter implements Comparable<Meter> {
         this.user = user;
     }
 
-    public Integer getHeat() {
-        return heat;
+    public Integer getValue() {
+        return value;
     }
 
-    public void setHeat(Integer heat) {
-        this.heat = heat;
+    public void setValue(Integer value) {
+        this.value = value;
     }
 
-    public Integer getCold() {
-        return cold;
+    public MeterType getType() {
+        return type;
     }
 
-    public void setCold(Integer cold) {
-        this.cold = cold;
+    public void setType(MeterType type) {
+        this.type = type;
     }
-
-    public Integer getHot() {
-        return hot;
-    }
-
-    public void setHot(Integer hot) {
-        this.hot = hot;
-    }
-
-
 
     public LocalDate getDate() {
         return date;
@@ -101,14 +79,14 @@ public class Meter implements Comparable<Meter> {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return "Пользователь: " + this.getUser().getName() + " " + "| Отопл: " + this.getHeat()
-                + " " + "| ХВС: " + this.getCold() + " " + "| ГВС: " + this.getHot() + "| Дата: " + this.getDate();
-    }
+//    @Override
+//    public String toString() {
+//        return "Пользователь: " + this.getUser().getName() + " " + "| Отопл: " + this.getHeat()
+//                + " " + "| ХВС: " + this.getCold() + " " + "| ГВС: " + this.getHot() + "| Дата: " + this.getDate();
+//    }
 
     @Override
-    public int compareTo(Meter r) {
+    public int compareTo(MeterData r) {
         if (this.getDate().isAfter(r.getDate())) {
             return 1;
         } else if (this.getDate().isBefore(r.getDate())) {

@@ -1,6 +1,6 @@
 package com.slavbx.monserv.services;
 
-import com.slavbx.monserv.models.Meter;
+import com.slavbx.monserv.models.MeterData;
 import com.slavbx.monserv.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,33 +32,33 @@ public class MeterService {
 //        }
     }
 
-    public List<Meter> findAll() {
+    public List<MeterData> findAll() {
         return recordRepository.findAll();
     }
 
-    public Meter findActualByUserId(Long userId) { //Получить актуальную запись для текущего пользователя
-        List<Meter> list = recordRepository.findByUserId(userId);
+    public MeterData findActualByUserId(Long userId) { //Получить актуальную запись для текущего пользователя
+        List<MeterData> list = recordRepository.findByUserId(userId);
         list.sort(Comparator.reverseOrder());
         return list.get(0);
     }
 
-    public List<Meter> findActualAllUsers() {
-        List<Meter> list = recordRepository.findAll();
+    public List<MeterData> findActualAllUsers() {
+        List<MeterData> list = recordRepository.findAll();
         //list.sort(Comparator.reverseOrder());
-        Map<Long, List<Meter>> groupedRecords = list.stream().collect(Collectors.groupingBy(r -> r.getUser().getId()));
+        Map<Long, List<MeterData>> groupedRecords = list.stream().collect(Collectors.groupingBy(r -> r.getUser().getId()));
         //groupedRecords.forEach((k, v) -> v.sort(Comparator.reverseOrder()));
         return groupedRecords.values().stream().map(l -> l.get(0)).collect(Collectors.toList());
     }
 
-    public List<Meter> findByUserId(Long userId) {
+    public List<MeterData> findByUserId(Long userId) {
         return recordRepository.findByUserId(userId);
     }
 
-    public void save(Meter record) {
+    public void save(MeterData record) {
         recordRepository.save(record);
     }
 
-    public Optional<Meter> findById(Long aLong) {
+    public Optional<MeterData> findById(Long aLong) {
         return recordRepository.findById(aLong);
     }
 

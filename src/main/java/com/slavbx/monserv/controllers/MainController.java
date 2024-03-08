@@ -1,6 +1,6 @@
 package com.slavbx.monserv.controllers;
 
-import com.slavbx.monserv.models.Meter;
+import com.slavbx.monserv.models.MeterData;
 import com.slavbx.monserv.models.User;
 import com.slavbx.monserv.services.MeterService;
 import com.slavbx.monserv.services.UserService;
@@ -27,14 +27,14 @@ public class MainController {
 
     @GetMapping("getrecord")
     @ResponseBody
-    public Meter getRecord(@RequestParam(value = "id") Long id) {
+    public MeterData getRecord(@RequestParam(value = "id") Long id) {
         return recordService.findById(id).orElse(null);
     }
 
     @GetMapping("/getallrecords")
     @ResponseBody
-    public List<Meter> getAllRecord() {
-        List<Meter> list = recordService.findActualAllUsers();
+    public List<MeterData> getAllRecord() {
+        List<MeterData> list = recordService.findActualAllUsers();
         list.forEach(System.out::println);
         return list;
 
@@ -54,9 +54,9 @@ public class MainController {
         if (userService.findByName("slav").isEmpty()) {
             User user = new User(1L, User.Level.USER, "slav", "123");
             userService.save(user);
-            recordService.save(new Meter(1L, 111,11,11, user, LocalDate.parse("2023-11-12")));
-            recordService.save(new Meter(2L, 222,22,22, user, LocalDate.parse("2023-12-15")));
-            recordService.save(new Meter(3L, 333,33,33, user, LocalDate.parse("2024-01-05")));
+//            recordService.save(new MeterData(1L, 111,11,11, user, LocalDate.parse("2023-11-12")));
+//            recordService.save(new MeterData(2L, 222,22,22, user, LocalDate.parse("2023-12-15")));
+//            recordService.save(new MeterData(3L, 333,33,33, user, LocalDate.parse("2024-01-05")));
 
 
         }

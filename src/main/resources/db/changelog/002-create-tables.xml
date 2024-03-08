@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        logicalFilePath="db/changelog.xml">
+        <changeSet id="002-create-tables" author="slavbx">
+
+            <createTable tableName="users" schemaName="monserv">
+                <column name="id" type="BIGINT" defaultValueComputed="nextval('users_id_seq')">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="level" type="VARCHAR(255)"/>
+                <column name="name" type="VARCHAR(255)"/>
+                <column name="password" type="VARCHAR(255)"/>
+            </createTable>
+
+            <createTable tableName="meter_types" schemaName="monserv">
+                <column name="id" type="BIGINT" defaultValueComputed="nextval('meter_types_id_seq')">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="name" type="VARCHAR(255)"/>
+            </createTable>
+
+            <createTable tableName="meters" schemaName="monserv">
+                <column name="id" type="BIGINT" defaultValueComputed="nextval('meters_id_seq')">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="value" type="BIGINT"/>
+                <column name="user_id" type="BIGINT">
+                    <constraints
+                            foreignKeyName="fk_user_id"
+                            referencedTableSchemaName="monserv"
+                            referencedTableName="users"
+                            referencedColumnNames="id"
+                    />
+                </column>
+                <column name="type_id" type="BIGINT">
+                    <constraints
+                            foreignKeyName="fk_type_id"
+                            referencedTableSchemaName="monserv"
+                            referencedTableName="meter_types"
+                            referencedColumnNames="id"
+                    />
+                </column>
+                <column name="date" type="DATE"/>
+            </createTable>
+
+<!--            <createTable tableName="events" schemaName="monserv">-->
+<!--&lt;!&ndash;                <column name="id" type="BIGINT" autoIncrement="true"><constraints primaryKey="true" nullable="false" /></column>&ndash;&gt;-->
+<!--                <column name="id" type="BIGINT" defaultValueComputed="nextval('events_id_seq')">-->
+<!--                    <constraints primaryKey="true" nullable="false"/>-->
+<!--                </column>-->
+<!--                <column name="description" type="VARCHAR(255)" />-->
+<!--                <column name="user_id" type="BIGINT">-->
+<!--                    <constraints nullable="false"-->
+<!--                                 foreignKeyName="fk_user_id"-->
+<!--                                 references="users(id)"/>-->
+<!--                </column>-->
+<!--                <column name="date" type="DATE" />-->
+<!--                <column name="time" type="TIME" />-->
+<!--            </createTable>-->
+        </changeSet>
+</databaseChangeLog>

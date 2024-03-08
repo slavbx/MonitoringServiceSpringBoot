@@ -26,8 +26,8 @@ public class User {
     @Column
     private String password;        //Пароль
     @OneToMany(mappedBy = "user")
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    private List<Meter> records;   //Список показаний счётчиков
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<MeterData> meterDatas;   //Список показаний счётчиков
 
 
     public enum Level {
@@ -42,7 +42,7 @@ public class User {
         this.level = level;
         this.name = name;
         this.password = password;
-        this.records = new ArrayList<>();
+        this.meterDatas = new ArrayList<>();
     }
 
     public Long getId() {
@@ -77,16 +77,16 @@ public class User {
         this.password = password;
     }
 
-    public List<Meter> getRecords() {
-        return records;
+    public List<MeterData> getMeterDatas() {
+        return meterDatas;
     }
 
-    public void setRecords(List<Meter> records) {
-        this.records = records;
+    public void setMeterDatas(List<MeterData> records) {
+        this.meterDatas = records;
     }
 
-    public void addRecord(Meter record) {
-        records.add(record);
+    public void addRecord(MeterData record) {
+        meterDatas.add(record);
     }
 
     @Override

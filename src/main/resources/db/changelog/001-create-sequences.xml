@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        logicalFilePath="db/changelog.xml">
+        <changeSet id="001-create-sequences" author="slavbx">
+            <createSequence sequenceName="users_id_seq" schemaName="monserv"
+                            cacheSize="1"
+                            cycle="false"
+                            dataType="bigint"
+                            incrementBy="1"
+                            maxValue="9223372036854775807"
+                            minValue="1"
+                            startValue="1"/>
+            <createSequence sequenceName="meter_types_id_seq" schemaName="monserv"
+                            cacheSize="1"
+                            cycle="false"
+                            dataType="bigint"
+                            incrementBy="1"
+                            maxValue="9223372036854775807"
+                            minValue="1"
+                            startValue="1"/>
+            <createSequence sequenceName="meters_id_seq" schemaName="monserv"
+                            cacheSize="1"
+                            cycle="false"
+                            dataType="bigint"
+                            incrementBy="1"
+                            maxValue="9223372036854775807"
+                            minValue="1"
+                            startValue="1"/>
+<!--            <createSequence sequenceName="events_id_seq" schemaName="monserv" -->
+<!--                            cacheSize="1" -->
+<!--                            cycle="false" -->
+<!--                            dataType="bigint" -->
+<!--                            incrementBy="1" -->
+<!--                            maxValue="9223372036854775807" -->
+<!--                            minValue="1" -->
+<!--                            startValue="1"/>-->
+        </changeSet>
+</databaseChangeLog>

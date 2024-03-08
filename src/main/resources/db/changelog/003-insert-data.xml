@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        logicalFilePath="db/changelog.xml">
+    <changeSet id="003-insert-data" author="slavbx">
+
+        <insert tableName="users" schemaName="monserv">
+<!--            <column name="id" valueNumeric="1"/>-->
+            <column name="level" value="ADMIN"/>
+            <column name="name" value="admin"/>
+            <column name="password" value="admin"/>
+        </insert>
+
+        <insert tableName="meter_types" schemaName="monserv">
+<!--            <column name="id" valueNumeric="1"/>-->
+            <column name="name" value="HOT"/>
+        </insert>
+        <insert tableName="meter_types" schemaName="monserv">
+<!--            <column name="id" valueNumeric="2"/>-->
+            <column name="name" value="COLD"/>
+        </insert>
+        <insert tableName="meter_types" schemaName="monserv">
+<!--            <column name="id" valueNumeric="3"/>-->
+            <column name="name" value="HEAT"/>
+        </insert>
+
+        <insert tableName="meters" schemaName="monserv">
+<!--            <column name="id" valueNumeric="1"/>-->
+            <column name="value" valueNumeric="555"/>
+            <column name="user_id" valueNumeric="1"/>
+            <column name="type_id" valueNumeric="1"/>
+            <column name="date" value="2023-12-15"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
